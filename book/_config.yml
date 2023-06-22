@@ -30,7 +30,3 @@ repository:
 html:
   use_issues_button: false
   use_repository_button: false
-
-sphinx:
-  config:
-    html_theme: quantecon_book_theme
