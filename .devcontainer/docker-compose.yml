@@ -1,12 +1,10 @@
 version: "3.9"
 
 services:
-  jupyter_book:
+  devcontainer:
     build:
       context: ..
       dockerfile: .devcontainer/Dockerfile
-    image: jupyter_book
-    container_name: jupyter_book_devcontainer
     volumes:
       - type: bind
         source: ..

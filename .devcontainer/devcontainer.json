@@ -1,28 +1,26 @@
 {
-    "name": "jupyter_book_devcontainer",
-    "dockerComposeFile": "./docker-compose.yml",
-    "service": "jupyter_book",
-    "workspaceFolder": "/workspace",
-    "customizations": {
-        "vscode": {
-            "settings": {
-                "editor.formatOnSave": true,
-                "editor.insertSpaces": true,
-                "files.eol": "\n",
-                "files.trimTrailingWhitespace": true
-            },
-            "extensions": [
-                "mhutchie.git-graph",
-                "eamodio.gitlens",
-                "ms-azuretools.vscode-docker",
-                "ms-python.python",
-                "ms-toolsai.jupyter",
-                "ms-toolsai.vscode-jupyter-cell-tags",
-                "ms-toolsai.jupyter-renderers",
-                "ms-toolsai.vscode-jupyter-slideshow",
-                "ms-python.vscode-pylance",
-                "ms-toolsai.jupyter"
-            ]
-        }
+  "name": "${containerWorkspaceFolder}",
+  "dockerComposeFile": "./docker-compose.yml",
+  "service": "devcontainer",
+  "workspaceFolder": "/workspace",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true,
+        "files.trimTrailingWhitespace": true
+      },
+      "extensions": [
+        "mhutchie.git-graph",
+        "eamodio.gitlens",
+        "editorconfig.editorconfig",
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "ms-toolsai.vscode-jupyter-cell-tags",
+        "ms-toolsai.jupyter-renderers",
+        "ms-toolsai.vscode-jupyter-slideshow",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter"
+      ]
     }
+  }
 }
