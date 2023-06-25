@@ -299,7 +299,12 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">散布図を出す</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">ヒストグラムを重ねる</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">ヒストグラムを重ねる</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">相関が強かった方</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">相関が弱かった方</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">クロステーブル集計</a></li>
 </ul>
             </nav>
         </div>
@@ -314,7 +319,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>各列のデータの関係を調べる<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <p>一つ一つの列について，どのようなデータが入っているかは調べました．</p>
-<p>これから列同士の関係を調べていきましょう．</p>
+<p>これから列同士の関係を調べていきましょう．前回同様，データを入手するところから始めていきます．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -388,8 +393,12 @@ Name: Transported, dtype: float64
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">Spa</span></code> と <code class="docutils literal notranslate"><span class="pre">RoomService</span></code> と <code class="docutils literal notranslate"><span class="pre">VRDeck</span></code> が比較的強い負の相関を持っていることがわかります．</p>
+<p><code class="docutils literal notranslate"><span class="pre">VRDeck</span></code> と <code class="docutils literal notranslate"><span class="pre">Spa</span></code> と <code class="docutils literal notranslate"><span class="pre">RoomService</span></code> の３つが比較的強い負の相関を持っていることがわかります．</p>
+<p>逆に <code class="docutils literal notranslate"><span class="pre">FoodCourt</span></code> と <code class="docutils literal notranslate"><span class="pre">ShoppingMall</span></code> と <code class="docutils literal notranslate"><span class="pre">Age</span></code> の相関は弱いですね．</p>
 <p>しかし，相関係数を出すだけだとやはり分布がわからないので，ここでもヒストグラムを出してみましょう．</p>
+<section id="id4">
+<h3>相関が強かった方<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>相関が強かった方から始めます．</p>
 <p><code class="docutils literal notranslate"><span class="pre">Transported</span></code> の値が True であるか False であるかで場合分けしてヒストグラムを出し，それを重ねます．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -436,7 +445,7 @@ Name: Transported, dtype: float64
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span>
     <span class="n">data</span><span class="o">=</span><span class="n">train_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span>
-    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;FoodCourt&quot;</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Spa&quot;</span><span class="p">,</span>
     <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Transported&quot;</span><span class="p">,</span>
     <span class="n">multiple</span><span class="o">=</span><span class="s2">&quot;dodge&quot;</span><span class="p">,</span>
     <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -446,10 +455,9 @@ Name: Transported, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/92037dc0e76d241e42451b9a98b4b30e3bb32a7a2123227114840d239b4a6c83.png" src="_images/92037dc0e76d241e42451b9a98b4b30e3bb32a7a2123227114840d239b4a6c83.png" />
+<img alt="_images/5422f9cc501cfb79ac96b3fa4cf63441f70e34acf2e56b59f124e20bb0d287eb.png" src="_images/5422f9cc501cfb79ac96b3fa4cf63441f70e34acf2e56b59f124e20bb0d287eb.png" />
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">FoodCourt</span></code> に関しても，使用しなかった人の過半数が異次元に飛ばされてしまっているのですが，非常に多く利用したひとに関してはむしろ異次元に飛ばされやすいため，相関係数が中途半端になっていたようです．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span>
@@ -467,7 +475,30 @@ Name: Transported, dtype: float64
 <img alt="_images/3be29071344a7ea27132b06c0ee7eba1c773c74fcff5e8273770feba13f5f8de.png" src="_images/3be29071344a7ea27132b06c0ee7eba1c773c74fcff5e8273770feba13f5f8de.png" />
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">RoomService</span></code> については，消費量が多い方が異次元に飛ばされにくいと断言できますね．</p>
+</section>
+<section id="id5">
+<h3>相関が弱かった方<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<p>相関が弱かった <code class="docutils literal notranslate"><span class="pre">FoodCourt</span></code> と <code class="docutils literal notranslate"><span class="pre">ShoppingMall</span></code> と <code class="docutils literal notranslate"><span class="pre">Age</span></code> についても調べましょう．</p>
+<p>どんな分布になっているでしょうか？</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">train_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;FoodCourt&quot;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Transported&quot;</span><span class="p">,</span>
+    <span class="n">multiple</span><span class="o">=</span><span class="s2">&quot;dodge&quot;</span><span class="p">,</span>
+    <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/92037dc0e76d241e42451b9a98b4b30e3bb32a7a2123227114840d239b4a6c83.png" src="_images/92037dc0e76d241e42451b9a98b4b30e3bb32a7a2123227114840d239b4a6c83.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">FoodCourt</span></code> に関しても，相関が強かった列と同様に使用しなかった人の過半数が異次元に飛ばされてしまっています．</p>
+<p>しかし，非常に多く利用したひとに関してはむしろ異次元に飛ばされやすいため，相関係数が中途半端になっていたようです．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span>
@@ -486,11 +517,115 @@ Name: Transported, dtype: float64
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">ShoppingMall</span></code> にも <code class="docutils literal notranslate"><span class="pre">FoodCourt</span></code> と同じ傾向があります．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">train_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Transported&quot;</span><span class="p">,</span>
+    <span class="n">multiple</span><span class="o">=</span><span class="s2">&quot;dodge&quot;</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/fc0fdf313d2dbcbd28603db88740bb0a5c32f5eb16b5e3499b349347e3c246da.png" src="_images/fc0fdf313d2dbcbd28603db88740bb0a5c32f5eb16b5e3499b349347e3c246da.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Age</span></code> との関係はちょっと複雑です．</p>
 <ul class="simple">
-<li><p>全く使用していない人は飛ばされやすいのですが，</p></li>
-<li><p>非常に多く使用している人も，飛ばされやすい</p></li>
+<li><p>年齢が 10 歳以下だと異次元に飛ばされやすい一方で，</p></li>
+<li><p>年齢が 20 代だと飛ばされにくく，</p></li>
 </ul>
-<p>ということが成り立ちます．</p>
+<p>30歳以上の年齢ではほとんど差がありません．</p>
+</section>
+</section>
+<section id="id6">
+<h2>クロステーブル集計<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<p>数値列と Bool 値の列の関係の可視化は，ヒストグラムを重ねる方法でできました．</p>
+<p>では Bool 値同士とか，カテゴリ量と Bool 値だった場合はどうしたらいいでしょうか？</p>
+<p>一つの方法は，クロステーブルを作ることです．やってみましょう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span>
+    <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;CryoSleep&quot;</span><span class="p">],</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Transported&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Transported</th>
+      <th>False</th>
+      <th>True</th>
+    </tr>
+    <tr>
+      <th>CryoSleep</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>False</th>
+      <td>3650</td>
+      <td>1789</td>
+    </tr>
+    <tr>
+      <th>True</th>
+      <td>554</td>
+      <td>2483</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>簡潔な表になりましたが，視覚的にわかりやすくはないかもしれません．</p>
+<p><code class="docutils literal notranslate"><span class="pre">CryoSleep</span></code> の各値に対して，何%が飛ばされて，何%が飛ばされなかったのかがパッとわかった方がよい良い視覚化です．</p>
+<p>ヒートマップを使ってみましょう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sleep_cross</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span>
+    <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;CryoSleep&quot;</span><span class="p">],</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Transported&quot;</span><span class="p">],</span> <span class="n">normalize</span><span class="o">=</span><span class="s2">&quot;index&quot;</span>
+<span class="p">)</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">sleep_cross</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7b401ecf4a6cac56217aeed4e421bfcae6ef78145ea127dbdbd3d987fbce3b51.png" src="_images/7b401ecf4a6cac56217aeed4e421bfcae6ef78145ea127dbdbd3d987fbce3b51.png" />
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">crosstab</span></code> のオプションで <code class="docutils literal notranslate"><span class="pre">normarize</span></code> を指定することにより，足して１になるように正規化することができます．</p>
+<p>これは，割合や確率を求めることに対応しています．</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">Transported</span></code> の円グラフを出力したときに判明したように，何も情報がなければ飛ばされる確率は 50% です．
+そこで，0.5 を境に寒色と暖色が入れ替わるようなカラーマップを使用しています．</p>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">CryoSleep</span></code> が True だと，82% の確率で飛ばされてしまうことがわかりましたね．関係がありそうです．</p>
 </section>
 </section>
 
@@ -553,7 +688,12 @@ Name: Transported, dtype: float64
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">散布図を出す</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">ヒストグラムを重ねる</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">ヒストグラムを重ねる</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">相関が強かった方</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">相関が弱かった方</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">クロステーブル集計</a></li>
 </ul>
   </nav></div>
 
