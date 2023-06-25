@@ -626,6 +626,52 @@ Name: Transported, dtype: float64
 そこで，0.5 を境に寒色と暖色が入れ替わるようなカラーマップを使用しています．</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">CryoSleep</span></code> が True だと，82% の確率で飛ばされてしまうことがわかりましたね．関係がありそうです．</p>
+<p>他の特徴量に対しても，同様に可視化を試みましょう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">planet_cross</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span>
+    <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;HomePlanet&quot;</span><span class="p">],</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Transported&quot;</span><span class="p">],</span> <span class="n">normalize</span><span class="o">=</span><span class="s2">&quot;index&quot;</span>
+<span class="p">)</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">planet_cross</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/19391f9b61f31acdbba1b9d6ce9435d60d04762ae02dee60939c1000ad34a7c9.png" src="_images/19391f9b61f31acdbba1b9d6ce9435d60d04762ae02dee60939c1000ad34a7c9.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">destination_cross</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span>
+    <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Destination&quot;</span><span class="p">],</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Transported&quot;</span><span class="p">],</span> <span class="n">normalize</span><span class="o">=</span><span class="s2">&quot;index&quot;</span>
+<span class="p">)</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">destination_cross</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/42cfbd67669a52839e79a17f03f2375fb6e6ffd8c480d64988563a36d78f5b4c.png" src="_images/42cfbd67669a52839e79a17f03f2375fb6e6ffd8c480d64988563a36d78f5b4c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vip_cross</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span>
+    <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;VIP&quot;</span><span class="p">],</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Transported&quot;</span><span class="p">],</span> <span class="n">normalize</span><span class="o">=</span><span class="s2">&quot;index&quot;</span>
+<span class="p">)</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">vip_cross</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c2b850de95830841876cc5e1ce60c8e21a6fb532e82dd640f6f802e9fd917882.png" src="_images/c2b850de95830841876cc5e1ce60c8e21a6fb532e82dd640f6f802e9fd917882.png" />
+</div>
+</div>
 </section>
 </section>
 
