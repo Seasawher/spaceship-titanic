@@ -25,6 +25,5 @@ jupyter-book を用いて github pages としてデプロイしています．
 デプロイは `ghp-import` により自動で行うことができます．次のコマンドを開発環境から打ってください．
 
 ```bash
-cd book
-ghp-import -n -p -f _build/html
+ghp-import -n -p -f book/_build/html
 ```
