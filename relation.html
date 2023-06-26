@@ -300,11 +300,22 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">散布図を出す</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">ヒストグラムを重ねる</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">相関が強かった方</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">相関が弱かった方</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vrdeck">VRDeck</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spa">Spa</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roomservice">RoomService</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#foodcourt">FoodCourt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shoppingmall">ShoppingMall</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#age">Age</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">クロステーブル集計</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">クロステーブル集計</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cryosleep">CryoSleep</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homeplanet">HomePlanet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#destination">Destination</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vip">VIP</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cabin">Cabin</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -396,8 +407,8 @@ Name: Transported, dtype: float64
 <p><code class="docutils literal notranslate"><span class="pre">VRDeck</span></code> と <code class="docutils literal notranslate"><span class="pre">Spa</span></code> と <code class="docutils literal notranslate"><span class="pre">RoomService</span></code> の３つが比較的強い負の相関を持っていることがわかります．</p>
 <p>逆に <code class="docutils literal notranslate"><span class="pre">FoodCourt</span></code> と <code class="docutils literal notranslate"><span class="pre">ShoppingMall</span></code> と <code class="docutils literal notranslate"><span class="pre">Age</span></code> の相関は弱いですね．</p>
 <p>しかし，相関係数を出すだけだとやはり分布がわからないので，ここでもヒストグラムを出してみましょう．</p>
-<section id="id4">
-<h3>相関が強かった方<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<section id="vrdeck">
+<h3>VRDeck<a class="headerlink" href="#vrdeck" title="Permalink to this heading">#</a></h3>
 <p>相関が強かった方から始めます．</p>
 <p><code class="docutils literal notranslate"><span class="pre">Transported</span></code> の値が True であるか False であるかで場合分けしてヒストグラムを出し，それを重ねます．</p>
 <div class="cell docutils container">
@@ -440,6 +451,9 @@ Name: Transported, dtype: float64
 </div>
 <p>見やすいグラフになりました．</p>
 <p>これを見ると，<code class="docutils literal notranslate"><span class="pre">VRDeck</span></code> を使用していない（つまり図で値が 0.1 になっている）ことと，<code class="docutils literal notranslate"><span class="pre">Transported</span></code> が True であることが同時に起こりやすいことがわかりますね．</p>
+</section>
+<section id="spa">
+<h3>Spa<a class="headerlink" href="#spa" title="Permalink to this heading">#</a></h3>
 <p>他の特徴量に関しても，同様にして視覚化していきましょう．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -458,6 +472,9 @@ Name: Transported, dtype: float64
 <img alt="_images/5422f9cc501cfb79ac96b3fa4cf63441f70e34acf2e56b59f124e20bb0d287eb.png" src="_images/5422f9cc501cfb79ac96b3fa4cf63441f70e34acf2e56b59f124e20bb0d287eb.png" />
 </div>
 </div>
+</section>
+<section id="roomservice">
+<h3>RoomService<a class="headerlink" href="#roomservice" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span>
@@ -476,8 +493,8 @@ Name: Transported, dtype: float64
 </div>
 </div>
 </section>
-<section id="id5">
-<h3>相関が弱かった方<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<section id="foodcourt">
+<h3>FoodCourt<a class="headerlink" href="#foodcourt" title="Permalink to this heading">#</a></h3>
 <p>相関が弱かった <code class="docutils literal notranslate"><span class="pre">FoodCourt</span></code> と <code class="docutils literal notranslate"><span class="pre">ShoppingMall</span></code> と <code class="docutils literal notranslate"><span class="pre">Age</span></code> についても調べましょう．</p>
 <p>どんな分布になっているでしょうか？</p>
 <div class="cell docutils container">
@@ -499,6 +516,9 @@ Name: Transported, dtype: float64
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">FoodCourt</span></code> に関しても，相関が強かった列と同様に使用しなかった人の過半数が異次元に飛ばされてしまっています．</p>
 <p>しかし，非常に多く利用したひとに関してはむしろ異次元に飛ばされやすいため，相関係数が中途半端になっていたようです．</p>
+</section>
+<section id="shoppingmall">
+<h3>ShoppingMall<a class="headerlink" href="#shoppingmall" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span>
@@ -517,6 +537,9 @@ Name: Transported, dtype: float64
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">ShoppingMall</span></code> にも <code class="docutils literal notranslate"><span class="pre">FoodCourt</span></code> と同じ傾向があります．</p>
+</section>
+<section id="age">
+<h3>Age<a class="headerlink" href="#age" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span>
@@ -541,11 +564,13 @@ Name: Transported, dtype: float64
 <p>30歳以上の年齢ではほとんど差がありません．</p>
 </section>
 </section>
-<section id="id6">
-<h2>クロステーブル集計<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<section id="id4">
+<h2>クロステーブル集計<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
 <p>数値列と Bool 値の列の関係の可視化は，ヒストグラムを重ねる方法でできました．</p>
 <p>では Bool 値同士とか，カテゴリ量と Bool 値だった場合はどうしたらいいでしょうか？</p>
 <p>一つの方法は，クロステーブルを作ることです．やってみましょう．</p>
+<section id="cryosleep">
+<h3>CryoSleep<a class="headerlink" href="#cryosleep" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span>
@@ -626,6 +651,9 @@ Name: Transported, dtype: float64
 そこで，0.5 を境に寒色と暖色が入れ替わるようなカラーマップを使用しています．</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">CryoSleep</span></code> が True だと，82% の確率で飛ばされてしまうことがわかりましたね．関係がありそうです．</p>
+</section>
+<section id="homeplanet">
+<h3>HomePlanet<a class="headerlink" href="#homeplanet" title="Permalink to this heading">#</a></h3>
 <p>他の特徴量に対しても，同様に可視化を試みましょう．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -642,6 +670,9 @@ Name: Transported, dtype: float64
 <img alt="_images/19391f9b61f31acdbba1b9d6ce9435d60d04762ae02dee60939c1000ad34a7c9.png" src="_images/19391f9b61f31acdbba1b9d6ce9435d60d04762ae02dee60939c1000ad34a7c9.png" />
 </div>
 </div>
+</section>
+<section id="destination">
+<h3>Destination<a class="headerlink" href="#destination" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">destination_cross</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span>
@@ -657,6 +688,9 @@ Name: Transported, dtype: float64
 <img alt="_images/42cfbd67669a52839e79a17f03f2375fb6e6ffd8c480d64988563a36d78f5b4c.png" src="_images/42cfbd67669a52839e79a17f03f2375fb6e6ffd8c480d64988563a36d78f5b4c.png" />
 </div>
 </div>
+</section>
+<section id="vip">
+<h3>VIP<a class="headerlink" href="#vip" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vip_cross</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span>
@@ -672,6 +706,134 @@ Name: Transported, dtype: float64
 <img alt="_images/c2b850de95830841876cc5e1ce60c8e21a6fb532e82dd640f6f802e9fd917882.png" src="_images/c2b850de95830841876cc5e1ce60c8e21a6fb532e82dd640f6f802e9fd917882.png" />
 </div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>True のところでは確率に差があるのに，False では差がないとはどういうことでしょうか？</p>
+<p>VIP はもともと，全体の 98% が False と偏りがあったので，ばらつきが出やすいところです．False 群では差がないということは，偶然偏っただけではないかと思われます．</p>
+</div>
+</section>
+<section id="cabin">
+<h3>Cabin<a class="headerlink" href="#cabin" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Cabin</span></code> 列は値の可能性が多すぎるので，そのままでは可視化できません．</p>
+<p>列の内容を可視化したときと同じように，<code class="docutils literal notranslate"><span class="pre">deck</span></code> と <code class="docutils literal notranslate"><span class="pre">side</span></code> の２次元量だと思って分析します．</p>
+<p><code class="docutils literal notranslate"><span class="pre">deck</span></code> と <code class="docutils literal notranslate"><span class="pre">side</span></code> の組を固定するごとに，何パーセントの人が異次元に飛ばされているかを調べましょう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_deck</span><span class="p">(</span><span class="n">cabin</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">cabin</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">get_side</span><span class="p">(</span><span class="n">cabin</span><span class="p">):</span>
+    <span class="n">list_cabin</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">cabin</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">list_cabin</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">list_cabin</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+<span class="n">cabin_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">cabin_data</span><span class="p">[</span><span class="s2">&quot;deck&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Cabin&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">get_deck</span><span class="p">)</span>
+<span class="n">cabin_data</span><span class="p">[</span><span class="s2">&quot;side&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Cabin&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">get_side</span><span class="p">)</span>
+<span class="n">cabin_data</span><span class="p">[</span><span class="s2">&quot;Transported&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Transported&quot;</span><span class="p">]</span>
+<span class="n">cabin_data</span> <span class="o">=</span> <span class="n">cabin_data</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="n">cabin_data_total</span> <span class="o">=</span> <span class="n">cabin_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;deck&quot;</span><span class="p">,</span> <span class="s2">&quot;side&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">cabin_data_total</span> <span class="o">=</span> <span class="n">cabin_data_total</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;deck&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;side&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;Transported&quot;</span><span class="p">)</span>
+
+<span class="n">cabin_data_trans</span> <span class="o">=</span> <span class="n">cabin_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;deck&quot;</span><span class="p">,</span> <span class="s2">&quot;side&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">cabin_data_trans</span> <span class="o">=</span> <span class="n">cabin_data_trans</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;deck&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;side&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;Transported&quot;</span><span class="p">)</span>
+
+<span class="n">cabin_data_trans</span> <span class="o">/</span> <span class="n">cabin_data_total</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>side</th>
+      <th>P</th>
+      <th>S</th>
+    </tr>
+    <tr>
+      <th>deck</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>A</th>
+      <td>0.435897</td>
+      <td>0.546763</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>0.674221</td>
+      <td>0.784038</td>
+    </tr>
+    <tr>
+      <th>C</th>
+      <td>0.580645</td>
+      <td>0.763547</td>
+    </tr>
+    <tr>
+      <th>D</th>
+      <td>0.403226</td>
+      <td>0.465217</td>
+    </tr>
+    <tr>
+      <th>E</th>
+      <td>0.342657</td>
+      <td>0.371365</td>
+    </tr>
+    <tr>
+      <th>F</th>
+      <td>0.410987</td>
+      <td>0.470501</td>
+    </tr>
+    <tr>
+      <th>G</th>
+      <td>0.448276</td>
+      <td>0.583788</td>
+    </tr>
+    <tr>
+      <th>T</th>
+      <td>0.250000</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>飛ばされる確率の表が得られたので，ヒートマップとして可視化します．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cabin_trans</span> <span class="o">=</span> <span class="n">cabin_data_trans</span> <span class="o">/</span> <span class="n">cabin_data_total</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cabin_trans</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/92435120931c6828fdc2cd1ec5fd1b19a1d5c26b3ff132d9c61d3e2e9a6ef967.png" src="_images/92435120931c6828fdc2cd1ec5fd1b19a1d5c26b3ff132d9c61d3e2e9a6ef967.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">deck</span></code> が T のところは非常に確率が低くなっていますが，T デックはもともと数が少なくばらつきが出やすいので無視します．</p>
+<p>B, C デックの S サイドが高確率で飛ばされているのが目立ちますね．船室の位置は関係があるようです．</p>
+</section>
 </section>
 </section>
 
@@ -735,11 +897,22 @@ Name: Transported, dtype: float64
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">散布図を出す</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">ヒストグラムを重ねる</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">相関が強かった方</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">相関が弱かった方</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vrdeck">VRDeck</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spa">Spa</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roomservice">RoomService</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#foodcourt">FoodCourt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shoppingmall">ShoppingMall</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#age">Age</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">クロステーブル集計</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">クロステーブル集計</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cryosleep">CryoSleep</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homeplanet">HomePlanet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#destination">Destination</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vip">VIP</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cabin">Cabin</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

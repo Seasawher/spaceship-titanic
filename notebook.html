@@ -346,7 +346,7 @@ document.write(`
 <p class="admonition-title">Note</p>
 <p>Kaggle 上でノートブックを実行するとパスは Unix 形式になっていて区切り文字が <code class="docutils literal notranslate"><span class="pre">/</span></code> ですが，Windowsだと異なります．この違いを吸収するために <code class="docutils literal notranslate"><span class="pre">pathlib</span></code> ライブラリを使用しています．</p>
 </div>
-<p>一般には訓練データからテストデータを取り分ける作業が必要ですが，このコンペティションではテストデータと訓練データはあらかじめ取り分けられていますので，ここで読んだデータが訓練データになります．</p>
+<p>このコンペティションではテストデータと訓練データはあらかじめ取り分けられていますので，ここで読んだデータが訓練データになります．</p>
 <p><code class="docutils literal notranslate"><span class="pre">head</span></code> メソッドで最初の５行を見てみます．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -529,17 +529,16 @@ dtype: int64
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_row</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">total_row</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;全体の行数は</span><span class="si">{</span><span class="w"> </span><span class="n">total_row</span><span class="w"> </span><span class="si">}</span><span class="s2">です&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8693
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>全体の行数は8693です
 </pre></div>
 </div>
 </div>
 </div>
-<p>全体の行数は 8693 ですね．</p>
 </section>
 <section id="id4">
 <h2>各列のデータを詳しく見る<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
@@ -561,51 +560,11 @@ dtype: int64
 <img alt="_images/4cc11458cefd5f8900cf921bef076a97137cc4ae65653403fc485c0385c0635a.png" src="_images/4cc11458cefd5f8900cf921bef076a97137cc4ae65653403fc485c0385c0635a.png" />
 </div>
 </div>
-<p>ヒストグラムを出力することができました．少し小さいので，個別にも出してみます．</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/8ff316bb48274596cadbe51fcc8ee5e7bfaa578fadd5d31d72077dba8fdddd7c.png" src="_images/8ff316bb48274596cadbe51fcc8ee5e7bfaa578fadd5d31d72077dba8fdddd7c.png" />
-</div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">Age</span></code> のヒストグラムを見ていると，次のようなことがわかります．</p>
+<p>ヒストグラムからわかること</p>
 <ul class="simple">
-<li><p>理由は不明ですが，３歳～４歳の間隔でまったくデータがない列があります．一方で突出して大きいところもあります．</p></li>
-<li><p>20歳のあたりと０歳のところが山のようになっています</p></li>
+<li><p>Age にはなぜか特定の年齢のひとがいないようだ. 一定の間隔で，該当者がゼロの年齢が現れる．</p></li>
+<li><p>Age 以外の５つの数値属性は，どれも０付近に値が偏っている</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;RoomService&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/5fe1296433115b0b1e43359b00b4aca4808c0ad602fc3230fa17f46d5b2f0b4a.png" src="_images/5fe1296433115b0b1e43359b00b4aca4808c0ad602fc3230fa17f46d5b2f0b4a.png" />
-</div>
-</div>
-<p>上記は <code class="docutils literal notranslate"><span class="pre">RoomService</span></code> のヒストグラムですが，非常にデータが偏っています．</p>
-<p><code class="docutils literal notranslate"><span class="pre">RoomService</span></code>, <code class="docutils literal notranslate"><span class="pre">FoodCourt</span></code>, <code class="docutils literal notranslate"><span class="pre">ShoppingMall</span></code>, <code class="docutils literal notranslate"><span class="pre">Spa</span></code>, <code class="docutils literal notranslate"><span class="pre">VRDeck</span></code> の全部が同様な分布になっていますね．</p>
-<p>データの高低差が大きすぎて見づらいので，対数スケールに変換してみます．</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;RoomService&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/b0f5cd475d38a5a1bc62fe63945ded78492aa237b1170916791c394f908d0830.png" src="_images/b0f5cd475d38a5a1bc62fe63945ded78492aa237b1170916791c394f908d0830.png" />
-</div>
-</div>
-<p>見やすいスケールになりました．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;HomePlanet&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>

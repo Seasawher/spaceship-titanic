@@ -301,8 +301,19 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">データの入手</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">欠損値の調査</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">ヒストグラムを使う</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">円グラフを使う</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">ヒストグラムを使う</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#age">Age</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roomservice">RoomService ほか</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">円グラフを使う</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homeplanet">HomePlanet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cryosleep">CryoSleep</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#destination">Destination</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vip">VIP</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transported">Transported</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">ヒートマップを使う</a></li>
 </ul>
             </nav>
@@ -557,7 +568,10 @@ dtype: int64
 <img alt="_images/4cc11458cefd5f8900cf921bef076a97137cc4ae65653403fc485c0385c0635a.png" src="_images/4cc11458cefd5f8900cf921bef076a97137cc4ae65653403fc485c0385c0635a.png" />
 </div>
 </div>
-<p>ヒストグラムを出力することができました．少し小さいので，個別にも出してみます．</p>
+<p>ヒストグラムを出力することができました．</p>
+<section id="age">
+<h3>Age<a class="headerlink" href="#age" title="Permalink to this heading">#</a></h3>
+<p>ヒストグラムが少し小さいので，個別にも出してみます．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
@@ -574,6 +588,9 @@ dtype: int64
 <li><p>理由は不明ですが，３歳～４歳の間隔でまったくデータがない列があります．一方で突出して大きいところもあります．</p></li>
 <li><p>20歳のあたりと０歳のところが山のようになっています</p></li>
 </ul>
+</section>
+<section id="roomservice">
+<h3>RoomService ほか<a class="headerlink" href="#roomservice" title="Permalink to this heading">#</a></h3>
 <p>他のヒストグラムも出してみましょう．</p>
 <p>他はすべて似たような形なので，<code class="docutils literal notranslate"><span class="pre">RoomService</span></code> だけ出力します．</p>
 <div class="cell docutils container">
@@ -604,11 +621,14 @@ dtype: int64
 <p>見やすいグラフになりました．</p>
 <p>この「対数スケールに変換する」という技法は覚えておいた方が良さそうです．</p>
 </section>
+</section>
 <section id="id5">
 <h2>円グラフを使う<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <p>ヒストグラムでデータを可視化するのは良いアイデアですが，数値に対してしか使うことができません．</p>
 <p><code class="docutils literal notranslate"><span class="pre">HomePlanet</span></code> などのカテゴリが格納されいている列や，Bool型の列については，他の方法で可視化する必要があります．</p>
 <p>ここでは円グラフを使ってみます．</p>
+<section id="homeplanet">
+<h3>HomePlanet<a class="headerlink" href="#homeplanet" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;HomePlanet&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span>
@@ -642,6 +662,9 @@ Name: count, dtype: Int64
 </div>
 <p>変数がとる値の可能性が少ないときは円グラフとして出した方が見やすいですね．</p>
 <p>変数がとる値が多すぎると，円グラフでは表現しきれませんが……．</p>
+</section>
+<section id="cryosleep">
+<h3>CryoSleep<a class="headerlink" href="#cryosleep" title="Permalink to this heading">#</a></h3>
 <p>ほかの特徴量についてもやってみます．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -656,6 +679,9 @@ Name: count, dtype: Int64
 <img alt="_images/9290028bcf181f6135735f4ed611d0d186da0da182dbcff6d7668e672e66fc5a.png" src="_images/9290028bcf181f6135735f4ed611d0d186da0da182dbcff6d7668e672e66fc5a.png" />
 </div>
 </div>
+</section>
+<section id="destination">
+<h3>Destination<a class="headerlink" href="#destination" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Destination&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span>
@@ -669,6 +695,9 @@ Name: count, dtype: Int64
 <img alt="_images/7c8c711b0ec40a11f3be8da0c242dafe5eb7697dba5e6ce6dd826f861946bab0.png" src="_images/7c8c711b0ec40a11f3be8da0c242dafe5eb7697dba5e6ce6dd826f861946bab0.png" />
 </div>
 </div>
+</section>
+<section id="vip">
+<h3>VIP<a class="headerlink" href="#vip" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;VIP&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span>
@@ -682,6 +711,10 @@ Name: count, dtype: Int64
 <img alt="_images/3207e4d96a2ee16290b16bb51bb51d5355538ed7e817b5ff1b26b0961f97964d.png" src="_images/3207e4d96a2ee16290b16bb51bb51d5355538ed7e817b5ff1b26b0961f97964d.png" />
 </div>
 </div>
+</section>
+<section id="transported">
+<h3>Transported<a class="headerlink" href="#transported" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Transported</span></code> は予測対象の列なので，割合を知っておくことは重要に違いありませんね．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Transported&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span>
@@ -695,6 +728,7 @@ Name: count, dtype: Int64
 <img alt="_images/d0d2644f5c55a181e583ce03b941fef31538175dab51ce0e8906c1e1ae495c5a.png" src="_images/d0d2644f5c55a181e583ce03b941fef31538175dab51ce0e8906c1e1ae495c5a.png" />
 </div>
 </div>
+</section>
 </section>
 <section id="id6">
 <h2>ヒートマップを使う<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
@@ -913,8 +947,19 @@ Name: count, Length: 6560, dtype: Int64
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">データの入手</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">欠損値の調査</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">ヒストグラムを使う</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">円グラフを使う</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">ヒストグラムを使う</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#age">Age</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roomservice">RoomService ほか</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">円グラフを使う</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homeplanet">HomePlanet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cryosleep">CryoSleep</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#destination">Destination</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vip">VIP</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transported">Transported</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">ヒートマップを使う</a></li>
 </ul>
   </nav></div>
