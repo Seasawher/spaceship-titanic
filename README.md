@@ -20,10 +20,11 @@ jupyter-book build book
 
 ## デプロイ
 
-jupyter-book を用いて github pages としてデプロイしています．
+jupyter-book と GitHub Action を用いて github pages にデプロイしています．
 
-デプロイは `ghp-import` により自動で行うことができます．次のコマンドを開発環境から打ってください．
+デプロイは
 
-```bash
-ghp-import -n -p -f book/_build/html
-```
+* `book` ディレクトリや workflow を変更して，
+* `main` ブランチに push したときに
+
+自動で行われます．
