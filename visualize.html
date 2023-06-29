@@ -153,6 +153,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">訓練データを入手して可視化する</a></li>
 <li class="toctree-l1"><a class="reference internal" href="relation.html">各列のデータの関係を調べる</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">機械学習アルゴリズムが処理しやすいよう下準備する</a></li>
 </ul>
 
     </div>
@@ -350,6 +351,18 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">pathlib</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;numpy&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -515,20 +528,23 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PassengerId       0
-HomePlanet      201
-CryoSleep       217
-Cabin           199
-Destination     182
-Age             179
-VIP             203
-RoomService     181
-FoodCourt       183
-ShoppingMall    208
-Spa             183
-VRDeck          188
-Name            200
-Transported       0
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PassengerId         0
+HomePlanet        201
+CryoSleep         217
+Cabin             199
+Destination       182
+Age               179
+VIP               203
+RoomService       181
+FoodCourt         183
+ShoppingMall      208
+Spa               183
+VRDeck            188
+Name              200
+Transported         0
+consuming_VSR     544
+consuming_full    908
+group               0
 dtype: int64
 </pre></div>
 </div>
