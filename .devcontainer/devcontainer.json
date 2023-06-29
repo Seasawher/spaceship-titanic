@@ -20,7 +20,8 @@
         "ms-toolsai.vscode-jupyter-slideshow",
         "ms-python.vscode-pylance",
         "ms-toolsai.jupyter",
-        "ms-python.black-formatter"
+        "ms-python.black-formatter",
+        "github.vscode-github-actions"
       ]
     }
   }
