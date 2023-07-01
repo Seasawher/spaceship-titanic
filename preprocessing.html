@@ -300,6 +300,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">不要な属性を削除する</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">各列に下処理をする</a></li>
 </ul>
             </nav>
         </div>
@@ -335,12 +336,13 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">train_data_path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../input/spaceship-titanic/train.csv&quot;</span><span class="p">)</span>
 
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;numpy&#39;
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
 </pre></div>
 </div>
 </div>
@@ -362,8 +364,9 @@ document.write(`
     <span class="n">remainder</span><span class="o">=</span><span class="s2">&quot;passthrough&quot;</span>
 <span class="p">)</span>
 
-<span class="n">data_prepared</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_prepared</span><span class="p">)</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">set_output</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">)</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pipeline</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">train_data</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -386,16 +389,16 @@ document.write(`
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>0</th>
-      <th>1</th>
-      <th>2</th>
-      <th>3</th>
-      <th>4</th>
-      <th>5</th>
-      <th>6</th>
-      <th>7</th>
-      <th>8</th>
-      <th>9</th>
+      <th>remainder__PassengerId</th>
+      <th>remainder__HomePlanet</th>
+      <th>remainder__CryoSleep</th>
+      <th>remainder__Cabin</th>
+      <th>remainder__Destination</th>
+      <th>remainder__Age</th>
+      <th>remainder__RoomService</th>
+      <th>remainder__Spa</th>
+      <th>remainder__VRDeck</th>
+      <th>remainder__Transported</th>
     </tr>
   </thead>
   <tbody>
@@ -547,12 +550,21 @@ document.write(`
 <p>8693 rows × 10 columns</p>
 </div></div></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">ColumnTransformer.fit_transform</span></code> の返り値の型は行列であって DataFrame ではないのですが，それだと列名が落ちてしまって見づらいので <code class="docutils literal notranslate"><span class="pre">set_output</span></code> を使って DataFrame を返すように変更しています．</p>
+</div>
 <p>ここでは <code class="docutils literal notranslate"><span class="pre">Name</span></code>, <code class="docutils literal notranslate"><span class="pre">VIP</span></code>, <code class="docutils literal notranslate"><span class="pre">FoodCourt</span></code>, <code class="docutils literal notranslate"><span class="pre">ShoppingMall</span></code> を削除することにしました．</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Name</span></code> は人名なので，あまり関係がないだろうと判断しました．</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VIP</span></code> は値に偏りがありすぎます．</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">FoodCourt</span></code> と <code class="docutils literal notranslate"><span class="pre">ShoppingMall</span></code> は，予測対象の列との相関が微妙で，今回は単純化のために考えないことにしました．</p></li>
 </ul>
+</section>
+<section id="id3">
+<h2>各列に下処理をする<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>残った特徴量についても，そのまま機械学習アルゴリズムに読ませることはできません．</p>
+<p>アルゴリズムが処理しやすいように，扱いやすい形に変換します．</p>
 </section>
 </section>
 
@@ -615,6 +627,7 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">不要な属性を削除する</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">各列に下処理をする</a></li>
 </ul>
   </nav></div>
 

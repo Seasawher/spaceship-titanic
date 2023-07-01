@@ -37,10 +37,11 @@ train_data = pd.read_csv(
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [0;32mIn[1], line 1[0m
-[0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
-[1;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mpd[39;00m
+Cell [0;32mIn[1], line 2[0m
+[1;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[0;32m----> 2[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mpd[39;00m
 [1;32m      3[0m [38;5;28;01mimport[39;00m [38;5;21;01mpathlib[39;00m
+[1;32m      5[0m train_data_path [38;5;241m=[39m pathlib[38;5;241m.[39mPath([38;5;124m"[39m[38;5;124m../input/spaceship-titanic/train.csv[39m[38;5;124m"[39m)
 
-[0;31mModuleNotFoundError[0m: No module named 'numpy'
+[0;31mModuleNotFoundError[0m: No module named 'pandas'
 
