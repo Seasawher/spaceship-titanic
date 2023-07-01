@@ -300,7 +300,10 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">不要な属性を削除する</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">各列に下処理をする</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">各列に下処理をする</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homeplanet">HomePlanet</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -366,7 +369,7 @@ document.write(`
 
 <span class="n">pipeline</span><span class="o">.</span><span class="n">set_output</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">)</span>
 
-<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pipeline</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">train_data</span><span class="p">))</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -565,6 +568,74 @@ document.write(`
 <h2>各列に下処理をする<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
 <p>残った特徴量についても，そのまま機械学習アルゴリズムに読ませることはできません．</p>
 <p>アルゴリズムが処理しやすいように，扱いやすい形に変換します．</p>
+<section id="homeplanet">
+<h3>HomePlanet<a class="headerlink" href="#homeplanet" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">HomePlanet</span></code> についてまず考えます．</p>
+<ul class="simple">
+<li><p>201 行の欠損値を持ち，</p></li>
+<li><p>3通りの値をとるカテゴリ属性</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Europa</span></code> だと異次元に飛ばされやすく，<code class="docutils literal notranslate"><span class="pre">Earth</span></code> だと飛ばされにくい．<code class="docutils literal notranslate"><span class="pre">Mars</span></code> はほぼ無関係</p></li>
+</ul>
+<p>ということがわかっています．</p>
+<p>欠損値のない数値属性に変換しましょう．</p>
+<p>まずは欠損値を処理します．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span>
+
+<span class="k">class</span> <span class="nc">HomePlanetTransformer</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">ColumnTransformer</span>
+<span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">SimpleImputer</span>
+
+<span class="n">drop_attribs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;VIP&quot;</span><span class="p">,</span> <span class="s2">&quot;FoodCourt&quot;</span><span class="p">,</span> <span class="s2">&quot;ShoppingMall&quot;</span><span class="p">]</span>
+
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;drop&quot;</span><span class="p">,</span> <span class="s2">&quot;drop&quot;</span><span class="p">,</span> <span class="n">drop_attribs</span><span class="p">),</span>
+
+        <span class="c1"># 欠損値を &quot;Mars&quot; という値に置き換える</span>
+        <span class="p">(</span><span class="s2">&quot;imp&quot;</span><span class="p">,</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;constant&quot;</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;Mars&quot;</span><span class="p">,</span> <span class="n">missing_values</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NA</span><span class="p">),</span> <span class="p">[</span><span class="s2">&quot;HomePlanet&quot;</span><span class="p">])</span>
+    <span class="p">],</span>
+    <span class="n">remainder</span><span class="o">=</span><span class="s2">&quot;passthrough&quot;</span>
+<span class="p">)</span>
+
+<span class="n">pipeline</span><span class="o">.</span><span class="n">set_output</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">)</span>
+
+<span class="n">pipeline</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>imp__HomePlanet             0
+remainder__PassengerId      0
+remainder__CryoSleep      217
+remainder__Cabin          199
+remainder__Destination    182
+remainder__Age            179
+remainder__RoomService    181
+remainder__Spa            183
+remainder__VRDeck         188
+remainder__Transported      0
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 </section>
 
@@ -627,7 +698,10 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">不要な属性を削除する</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">各列に下処理をする</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">各列に下処理をする</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homeplanet">HomePlanet</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
