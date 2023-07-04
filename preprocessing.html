@@ -300,6 +300,10 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">不要な属性を削除する</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">各列に下処理をする</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homeplanet">HomePlanet</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -336,23 +340,23 @@ document.write(`
 <section id="id2">
 <h2>不要な属性を削除する<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>いままでデータの可視化を進めてきました．これに基づいて，不要だとわかる特徴量を削除してみましょう．</p>
-<p>後でテストデータに対しても適用しないといけないので，再利用を意識して scikit-learn の変換器として削除処理を作ります．</p>
+<p>後でテストデータに対しても適用しないといけないので，再利用を意識して scikit-learn のパイプラインとして削除処理を作ります．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">ColumnTransformer</span>
 
-<span class="k">class</span> <span class="nc">RemoveAttributes</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">pass</span>
+<span class="n">drop_attribs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;VIP&quot;</span><span class="p">,</span> <span class="s2">&quot;FoodCourt&quot;</span><span class="p">,</span> <span class="s2">&quot;ShoppingMall&quot;</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;drop&quot;</span><span class="p">,</span> <span class="s2">&quot;drop&quot;</span><span class="p">,</span> <span class="n">drop_attribs</span><span class="p">),</span>
+    <span class="p">],</span>
+    <span class="n">remainder</span><span class="o">=</span><span class="s2">&quot;passthrough&quot;</span>
+<span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">X</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;VIP&quot;</span><span class="p">,</span> <span class="s2">&quot;FoodCourt&quot;</span><span class="p">,</span> <span class="s2">&quot;ShoppingMall&quot;</span><span class="p">])</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">set_output</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">)</span>
 
-<span class="n">remover</span> <span class="o">=</span> <span class="n">RemoveAttributes</span><span class="p">()</span>
-<span class="n">remover</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -375,16 +379,16 @@ document.write(`
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>PassengerId</th>
-      <th>HomePlanet</th>
-      <th>CryoSleep</th>
-      <th>Cabin</th>
-      <th>Destination</th>
-      <th>Age</th>
-      <th>RoomService</th>
-      <th>Spa</th>
-      <th>VRDeck</th>
-      <th>Transported</th>
+      <th>remainder__PassengerId</th>
+      <th>remainder__HomePlanet</th>
+      <th>remainder__CryoSleep</th>
+      <th>remainder__Cabin</th>
+      <th>remainder__Destination</th>
+      <th>remainder__Age</th>
+      <th>remainder__RoomService</th>
+      <th>remainder__Spa</th>
+      <th>remainder__VRDeck</th>
+      <th>remainder__Transported</th>
     </tr>
   </thead>
   <tbody>
@@ -536,10 +540,33 @@ document.write(`
 <p>8693 rows × 10 columns</p>
 </div></div></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">ColumnTransformer.fit_transform</span></code> の返り値の型は行列であって DataFrame ではないのですが，それだと列名が落ちてしまって見づらいので <code class="docutils literal notranslate"><span class="pre">set_output</span></code> を使って DataFrame を返すように変更しています．</p>
+</div>
 <p>ここでは <code class="docutils literal notranslate"><span class="pre">Name</span></code>, <code class="docutils literal notranslate"><span class="pre">VIP</span></code>, <code class="docutils literal notranslate"><span class="pre">FoodCourt</span></code>, <code class="docutils literal notranslate"><span class="pre">ShoppingMall</span></code> を削除することにしました．</p>
-<p><code class="docutils literal notranslate"><span class="pre">Name</span></code> は人名なので，あまり関係がないだろうと判断．</p>
-<p><code class="docutils literal notranslate"><span class="pre">VIP</span></code> は値に偏りがありすぎです．</p>
-<p><code class="docutils literal notranslate"><span class="pre">FoodCourt</span></code> と <code class="docutils literal notranslate"><span class="pre">ShoppingMall</span></code> は，予測対象の列との相関が微妙で，今回は単純化のために考えないことにしたかったからです．</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Name</span></code> は人名なので，あまり関係がないだろうと判断しました．</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VIP</span></code> は値に偏りがありすぎます．</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FoodCourt</span></code> と <code class="docutils literal notranslate"><span class="pre">ShoppingMall</span></code> は，予測対象の列との相関が微妙で，今回は単純化のために考えないことにしました．</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>各列に下処理をする<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>残った特徴量についても，そのまま機械学習アルゴリズムに読ませることはできません．</p>
+<p>アルゴリズムが処理しやすいように，扱いやすい形に変換します．</p>
+<section id="homeplanet">
+<h3>HomePlanet<a class="headerlink" href="#homeplanet" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">HomePlanet</span></code> についてまず考えます．</p>
+<ul class="simple">
+<li><p>201 行の欠損値を持ち，</p></li>
+<li><p>3通りの値をとるカテゴリ属性</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Europa</span></code> だと異次元に飛ばされやすく，<code class="docutils literal notranslate"><span class="pre">Earth</span></code> だと飛ばされにくい．<code class="docutils literal notranslate"><span class="pre">Mars</span></code> はほぼ無関係</p></li>
+</ul>
+<p>ということがわかっています．</p>
+<p>欠損値のない数値属性に変換しましょう．</p>
+<p>後で scikit-learn のパイプラインに組み込むことができるように，<code class="docutils literal notranslate"><span class="pre">HomePlanet</span></code> 用の変換器を作っていきます．</p>
+</section>
 </section>
 </section>
 
@@ -602,6 +629,10 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">不要な属性を削除する</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">各列に下処理をする</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homeplanet">HomePlanet</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
