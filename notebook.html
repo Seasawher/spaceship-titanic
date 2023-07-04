@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>訓練データを入手して可視化する &#8212; Spaceship Titanic</title>
+    <title>訓練データを入手して調査する &#8212; Spaceship Titanic</title>
   
   
   
@@ -61,10 +61,9 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'visualize';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebook';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="各列のデータの関係を調べる" href="relation.html" />
     <link rel="prev" title="はじめに" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -151,9 +150,7 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">訓練データを入手して可視化する</a></li>
-<li class="toctree-l1"><a class="reference internal" href="relation.html">各列のデータの関係を調べる</a></li>
-<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">機械学習アルゴリズムが処理しやすいよう下準備する</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">訓練データを入手して調査する</a></li>
 </ul>
 
     </div>
@@ -208,7 +205,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/visualize.ipynb" target="_blank"
+      <li><a href="_sources/notebook.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -290,7 +287,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>訓練データを入手して可視化する</h1>
+    <h1>訓練データを入手して調査する</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -302,20 +299,13 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">データの入手</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">欠損値の調査</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">ヒストグラムを使う</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#age">Age</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roomservice">RoomService ほか</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">各列のデータを詳しく見る</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">ヒストグラムを描画する</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">サービスの消費額</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">グループ内で一貫性があるかどうか</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">円グラフを使う</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homeplanet">HomePlanet</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cryosleep">CryoSleep</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#destination">Destination</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vip">VIP</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transported">Transported</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">ヒートマップを使う</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">不要な属性を取り除く</a></li>
 </ul>
             </nav>
         </div>
@@ -328,7 +318,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>訓練データを入手して可視化する<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1>訓練データを入手して調査する<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <section id="id2">
 <h2>データの入手<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>以下のコードを実行し，訓練データを読み込みます</p>
@@ -356,7 +346,7 @@ document.write(`
 <p class="admonition-title">Note</p>
 <p>Kaggle 上でノートブックを実行するとパスは Unix 形式になっていて区切り文字が <code class="docutils literal notranslate"><span class="pre">/</span></code> ですが，Windowsだと異なります．この違いを吸収するために <code class="docutils literal notranslate"><span class="pre">pathlib</span></code> ライブラリを使用しています．</p>
 </div>
-<p>一般には訓練データからテストデータを取り分ける作業が必要ですが，このコンペティションではテストデータと訓練データはあらかじめ取り分けられていますので，ここで読んだデータが訓練データになります．</p>
+<p>このコンペティションではテストデータと訓練データはあらかじめ取り分けられていますので，ここで読んだデータが訓練データになります．</p>
 <p><code class="docutils literal notranslate"><span class="pre">head</span></code> メソッドで最初の５行を見てみます．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -535,24 +525,25 @@ dtype: int64
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">PassengerId</span></code> と <code class="docutils literal notranslate"><span class="pre">Transported</span></code> には欠損値がありませんが，それ以外の列には 100 ~ 200 行程度の欠損値があることがわかります．</p>
+<p>PassengerId と Transported には欠損値がありませんが，それ以外の列には 100 ~ 200 行程度の欠損値があることがわかります．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_row</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">total_row</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;全体の行数は</span><span class="si">{</span><span class="w"> </span><span class="n">total_row</span><span class="w"> </span><span class="si">}</span><span class="s2">です&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8693
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>全体の行数は8693です
 </pre></div>
 </div>
 </div>
 </div>
-<p>全体の行数は 8693 ですね．</p>
 </section>
 <section id="id4">
-<h2>ヒストグラムを使う<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<h2>各列のデータを詳しく見る<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<section id="id5">
+<h3>ヒストグラムを描画する<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
 <p>訓練データには数値型のものと，カテゴリになっているものと，Bool値が入っているものがありました．</p>
 <p>そのうち数値型のものはヒストグラムを描画するとよりイメージしやすくなります．</p>
 <div class="cell docutils container">
@@ -569,82 +560,11 @@ dtype: int64
 <img alt="_images/4cc11458cefd5f8900cf921bef076a97137cc4ae65653403fc485c0385c0635a.png" src="_images/4cc11458cefd5f8900cf921bef076a97137cc4ae65653403fc485c0385c0635a.png" />
 </div>
 </div>
-<p>ヒストグラムを出力することができました．</p>
-<section id="age">
-<h3>Age<a class="headerlink" href="#age" title="Permalink to this heading">#</a></h3>
-<p>ヒストグラムが少し小さいので，個別にも出してみます．</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/8ff316bb48274596cadbe51fcc8ee5e7bfaa578fadd5d31d72077dba8fdddd7c.png" src="_images/8ff316bb48274596cadbe51fcc8ee5e7bfaa578fadd5d31d72077dba8fdddd7c.png" />
-</div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">Age</span></code> のヒストグラムを見ていると，次のようなことがわかります．</p>
+<p>ヒストグラムからわかること</p>
 <ul class="simple">
-<li><p>理由は不明ですが，３歳～４歳の間隔でまったくデータがない列があります．一方で突出して大きいところもあります．</p></li>
-<li><p>20歳のあたりと０歳のところが山のようになっています</p></li>
+<li><p>Age にはなぜか特定の年齢のひとがいないようだ. 一定の間隔で，該当者がゼロの年齢が現れる．</p></li>
+<li><p>Age 以外の５つの数値属性は，どれも０付近に値が偏っている</p></li>
 </ul>
-</section>
-<section id="roomservice">
-<h3>RoomService ほか<a class="headerlink" href="#roomservice" title="Permalink to this heading">#</a></h3>
-<p>他のヒストグラムも出してみましょう．</p>
-<p>他はすべて似たような形なので，<code class="docutils literal notranslate"><span class="pre">RoomService</span></code> だけ出力します．</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;RoomService&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/5fe1296433115b0b1e43359b00b4aca4808c0ad602fc3230fa17f46d5b2f0b4a.png" src="_images/5fe1296433115b0b1e43359b00b4aca4808c0ad602fc3230fa17f46d5b2f0b4a.png" />
-</div>
-</div>
-<p>データの高低差が大きすぎて見づらいので，対数スケールに変換してみます．</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;RoomService&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/b0f5cd475d38a5a1bc62fe63945ded78492aa237b1170916791c394f908d0830.png" src="_images/b0f5cd475d38a5a1bc62fe63945ded78492aa237b1170916791c394f908d0830.png" />
-</div>
-</div>
-<p>見やすいグラフになりました．</p>
-<p>この「対数スケールに変換する」という技法は覚えておいた方が良さそうです．</p>
-</section>
-</section>
-<section id="id5">
-<h2>円グラフを使う<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
-<p>ヒストグラムでデータを可視化するのは良いアイデアですが，数値に対してしか使うことができません．</p>
-<p><code class="docutils literal notranslate"><span class="pre">HomePlanet</span></code> などのカテゴリが格納されいている列や，Bool型の列については，他の方法で可視化する必要があります．</p>
-<p>ここでは円グラフを使ってみます．</p>
-<section id="homeplanet">
-<h3>HomePlanet<a class="headerlink" href="#homeplanet" title="Permalink to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;HomePlanet&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span>
-    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">autopct</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%1.0f%%</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;HomePlanet&quot;</span>
-<span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/699b9648080360655eae3ca3ab1eaf9b5decb8c0753b796e22216f00fb9baee7.png" src="_images/699b9648080360655eae3ca3ab1eaf9b5decb8c0753b796e22216f00fb9baee7.png" />
-</div>
-</div>
-<p>全部で <code class="docutils literal notranslate"><span class="pre">Earth</span></code>, <code class="docutils literal notranslate"><span class="pre">Mars</span></code>, <code class="docutils literal notranslate"><span class="pre">Europa</span></code> の３つのカテゴリがあり，それぞれ図に示したような割合で出現することがわかりました．</p>
-<p>数をそのまま出すこともできて，それには次のように <code class="docutils literal notranslate"><span class="pre">value_counts()</span></code> メソッドを使用します．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;HomePlanet&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
@@ -661,81 +581,21 @@ Name: count, dtype: Int64
 </div>
 </div>
 </div>
-<p>変数がとる値の可能性が少ないときは円グラフとして出した方が見やすいですね．</p>
-<p>変数がとる値が多すぎると，円グラフでは表現しきれませんが……．</p>
-</section>
-<section id="cryosleep">
-<h3>CryoSleep<a class="headerlink" href="#cryosleep" title="Permalink to this heading">#</a></h3>
-<p>ほかの特徴量についてもやってみます．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;CryoSleep&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span>
-    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">autopct</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%1.0f%%</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;CryoSleep&quot;</span>
-<span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;CryoSleep&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9290028bcf181f6135735f4ed611d0d186da0da182dbcff6d7668e672e66fc5a.png" src="_images/9290028bcf181f6135735f4ed611d0d186da0da182dbcff6d7668e672e66fc5a.png" />
-</div>
-</div>
-</section>
-<section id="destination">
-<h3>Destination<a class="headerlink" href="#destination" title="Permalink to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Destination&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span>
-    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">autopct</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%1.0f%%</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Destination&quot;</span>
-<span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CryoSleep
+False    5439
+True     3037
+Name: count, dtype: int64
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/7c8c711b0ec40a11f3be8da0c242dafe5eb7697dba5e6ce6dd826f861946bab0.png" src="_images/7c8c711b0ec40a11f3be8da0c242dafe5eb7697dba5e6ce6dd826f861946bab0.png" />
 </div>
-</div>
-</section>
-<section id="vip">
-<h3>VIP<a class="headerlink" href="#vip" title="Permalink to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;VIP&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span>
-    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">autopct</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%1.0f%%</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;VIP&quot;</span>
-<span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/3207e4d96a2ee16290b16bb51bb51d5355538ed7e817b5ff1b26b0961f97964d.png" src="_images/3207e4d96a2ee16290b16bb51bb51d5355538ed7e817b5ff1b26b0961f97964d.png" />
-</div>
-</div>
-</section>
-<section id="transported">
-<h3>Transported<a class="headerlink" href="#transported" title="Permalink to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">Transported</span></code> は予測対象の列なので，割合を知っておくことは重要に違いありませんね．</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Transported&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span>
-    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">autopct</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%1.0f%%</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Transported&quot;</span>
-<span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/d0d2644f5c55a181e583ce03b941fef31538175dab51ce0e8906c1e1ae495c5a.png" src="_images/d0d2644f5c55a181e583ce03b941fef31538175dab51ce0e8906c1e1ae495c5a.png" />
-</div>
-</div>
-</section>
-</section>
-<section id="id6">
-<h2>ヒートマップを使う<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
-<p>円グラフで見やすく表示できるのは，値の可能性が数個程度のときです．</p>
-<p><code class="docutils literal notranslate"><span class="pre">Cabin</span></code> は値が多様なので，円グラフは適しません．</p>
-<p>どんな値が入っているか出力してみましょう．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Cabin&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
@@ -760,31 +620,189 @@ Name: count, Length: 6560, dtype: Int64
 </div>
 </div>
 </div>
-<p>6560通りの値がありますね．どうしたら見やすく表示できるでしょうか？</p>
-<p><code class="docutils literal notranslate"><span class="pre">Cabin</span></code> の情報は <code class="docutils literal notranslate"><span class="pre">deck/num/side</span></code> の形式になっています．</p>
-<p><code class="docutils literal notranslate"><span class="pre">deck</span></code> と <code class="docutils literal notranslate"><span class="pre">side</span></code> の値は数通りしかないようなので，この２つの特徴でグルーピングして集計してみましょう．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Destination&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Destination
+TRAPPIST-1e      5915
+55 Cancri e      1800
+PSO J318.5-22     796
+Name: count, dtype: Int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;VIP&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIP
+False    8291
+True      199
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Transported&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Transported
+True     4378
+False    4315
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h3>サービスの消費額<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p>RoomService, FoodCourt, ShoppingMall, Spa, VRDeck の５つの数値属性の相関はどうなっているだろうか？</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandas.plotting</span> <span class="kn">import</span> <span class="n">scatter_matrix</span>
 
-<span class="k">def</span> <span class="nf">get_deck</span><span class="p">(</span><span class="n">cabin</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">cabin</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">attributes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;RoomService&quot;</span><span class="p">,</span> <span class="s2">&quot;FoodCourt&quot;</span><span class="p">,</span> <span class="s2">&quot;ShoppingMall&quot;</span><span class="p">,</span> <span class="s2">&quot;Spa&quot;</span><span class="p">,</span> <span class="s2">&quot;VRDeck&quot;</span><span class="p">]</span>
+<span class="n">scatter_matrix</span><span class="p">(</span><span class="n">train_data</span><span class="p">[</span><span class="n">attributes</span><span class="p">],</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[&lt;Axes: xlabel=&#39;RoomService&#39;, ylabel=&#39;RoomService&#39;&gt;,
+        &lt;Axes: xlabel=&#39;FoodCourt&#39;, ylabel=&#39;RoomService&#39;&gt;,
+        &lt;Axes: xlabel=&#39;ShoppingMall&#39;, ylabel=&#39;RoomService&#39;&gt;,
+        &lt;Axes: xlabel=&#39;Spa&#39;, ylabel=&#39;RoomService&#39;&gt;,
+        &lt;Axes: xlabel=&#39;VRDeck&#39;, ylabel=&#39;RoomService&#39;&gt;],
+       [&lt;Axes: xlabel=&#39;RoomService&#39;, ylabel=&#39;FoodCourt&#39;&gt;,
+        &lt;Axes: xlabel=&#39;FoodCourt&#39;, ylabel=&#39;FoodCourt&#39;&gt;,
+        &lt;Axes: xlabel=&#39;ShoppingMall&#39;, ylabel=&#39;FoodCourt&#39;&gt;,
+        &lt;Axes: xlabel=&#39;Spa&#39;, ylabel=&#39;FoodCourt&#39;&gt;,
+        &lt;Axes: xlabel=&#39;VRDeck&#39;, ylabel=&#39;FoodCourt&#39;&gt;],
+       [&lt;Axes: xlabel=&#39;RoomService&#39;, ylabel=&#39;ShoppingMall&#39;&gt;,
+        &lt;Axes: xlabel=&#39;FoodCourt&#39;, ylabel=&#39;ShoppingMall&#39;&gt;,
+        &lt;Axes: xlabel=&#39;ShoppingMall&#39;, ylabel=&#39;ShoppingMall&#39;&gt;,
+        &lt;Axes: xlabel=&#39;Spa&#39;, ylabel=&#39;ShoppingMall&#39;&gt;,
+        &lt;Axes: xlabel=&#39;VRDeck&#39;, ylabel=&#39;ShoppingMall&#39;&gt;],
+       [&lt;Axes: xlabel=&#39;RoomService&#39;, ylabel=&#39;Spa&#39;&gt;,
+        &lt;Axes: xlabel=&#39;FoodCourt&#39;, ylabel=&#39;Spa&#39;&gt;,
+        &lt;Axes: xlabel=&#39;ShoppingMall&#39;, ylabel=&#39;Spa&#39;&gt;,
+        &lt;Axes: xlabel=&#39;Spa&#39;, ylabel=&#39;Spa&#39;&gt;,
+        &lt;Axes: xlabel=&#39;VRDeck&#39;, ylabel=&#39;Spa&#39;&gt;],
+       [&lt;Axes: xlabel=&#39;RoomService&#39;, ylabel=&#39;VRDeck&#39;&gt;,
+        &lt;Axes: xlabel=&#39;FoodCourt&#39;, ylabel=&#39;VRDeck&#39;&gt;,
+        &lt;Axes: xlabel=&#39;ShoppingMall&#39;, ylabel=&#39;VRDeck&#39;&gt;,
+        &lt;Axes: xlabel=&#39;Spa&#39;, ylabel=&#39;VRDeck&#39;&gt;,
+        &lt;Axes: xlabel=&#39;VRDeck&#39;, ylabel=&#39;VRDeck&#39;&gt;]], dtype=object)
+</pre></div>
+</div>
+<img alt="_images/cbe6f63a01f065d17629164de386de5fa8d73c43bf66011012201d3739de8827.png" src="_images/cbe6f63a01f065d17629164de386de5fa8d73c43bf66011012201d3739de8827.png" />
+</div>
+</div>
+<p>ヒストグラムは似ているが，相関はどれに関してもほとんどないようだ</p>
+<p>予測対象のカラムに対する相関関係を調べてみよう</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr_matrix</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">get_side</span><span class="p">(</span><span class="n">cabin</span><span class="p">):</span>
-    <span class="n">list_cabin</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">cabin</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">list_cabin</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">list_cabin</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-    <span class="k">return</span> <span class="kc">None</span>
+<span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;Transported&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Transported     1.000000
+FoodCourt       0.046566
+ShoppingMall    0.010141
+Age            -0.075026
+VRDeck         -0.207075
+Spa            -0.221131
+RoomService    -0.244611
+Name: Transported, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>サービスに対する消費額が大きいほど，Transport されにくいという結果が出ている
+この特徴量を組み合わせてみたらどうだろうか？</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;consuming_VSR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;VRDeck&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Spa&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;RoomService&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;consuming_full&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;VRDeck&quot;</span><span class="p">]</span>
+    <span class="o">+</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Spa&quot;</span><span class="p">]</span>
+    <span class="o">+</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;RoomService&quot;</span><span class="p">]</span>
+    <span class="o">+</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;FoodCourt&quot;</span><span class="p">]</span>
+    <span class="o">+</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;ShoppingMall&quot;</span><span class="p">]</span>
+<span class="p">)</span>
 
-<span class="n">cabin_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-<span class="n">cabin_data</span><span class="p">[</span><span class="s2">&quot;Cabin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Cabin&quot;</span><span class="p">]</span>
-<span class="n">cabin_data</span><span class="p">[</span><span class="s2">&quot;deck&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Cabin&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">get_deck</span><span class="p">)</span>
-<span class="n">cabin_data</span><span class="p">[</span><span class="s2">&quot;side&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Cabin&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">get_side</span><span class="p">)</span>
-<span class="n">cabin_data</span> <span class="o">=</span> <span class="n">cabin_data</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-
-<span class="n">cabin_data</span> <span class="o">=</span> <span class="n">cabin_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;deck&quot;</span><span class="p">,</span> <span class="s2">&quot;side&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-<span class="n">cabin_data</span> <span class="o">=</span> <span class="n">cabin_data</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;deck&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;side&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;Cabin&quot;</span><span class="p">)</span>
-<span class="n">cabin_data</span>
+<span class="n">corr_matrix</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;Transported&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Transported       1.000000
+FoodCourt         0.046566
+ShoppingMall      0.010141
+Age              -0.075026
+consuming_full   -0.197671
+VRDeck           -0.207075
+Spa              -0.221131
+RoomService      -0.244611
+consuming_VSR    -0.356140
+Name: Transported, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>相関がずっと大きくなった！特に，VR と Spa と RoomService の組み合わせが良いようだ</p>
+</section>
+<section id="id7">
+<h3>グループ内で一貫性があるかどうか<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<p>同じグループで区切ったときに，グループ内で Transport するかどうかは一致するだろうか？
+後で調べるために，group という属性を追加しておく</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;PassengerId&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0       0001
+1       0002
+2       0003
+3       0003
+4       0004
+        ... 
+8688    9276
+8689    9278
+8690    9279
+8691    9280
+8692    9280
+Name: group, Length: 8693, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>カテゴリ変数を調べる</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transported_and_sleep</span> <span class="o">=</span> <span class="n">train_data</span><span class="p">[[</span><span class="s2">&quot;Transported&quot;</span><span class="p">,</span> <span class="s2">&quot;CryoSleep&quot;</span><span class="p">,</span> <span class="s2">&quot;PassengerId&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;Transported&quot;</span><span class="p">,</span> <span class="s2">&quot;CryoSleep&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="n">transported_and_sleep</span>
 </pre></div>
 </div>
 </div>
@@ -806,76 +824,116 @@ Name: count, Length: 6560, dtype: Int64
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th>side</th>
-      <th>P</th>
-      <th>S</th>
+      <th></th>
+      <th></th>
+      <th>PassengerId</th>
     </tr>
     <tr>
-      <th>deck</th>
+      <th>Transported</th>
+      <th>CryoSleep</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">False</th>
+      <th>False</th>
+      <td>3650</td>
+    </tr>
+    <tr>
+      <th>True</th>
+      <td>554</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">True</th>
+      <th>False</th>
+      <td>1789</td>
+    </tr>
+    <tr>
+      <th>True</th>
+      <td>2483</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># クロス集計した表を作る</span>
+<span class="n">cross_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span>
+    <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;CryoSleep&quot;</span><span class="p">],</span> <span class="n">train_data</span><span class="p">[</span><span class="s2">&quot;Transported&quot;</span><span class="p">],</span> <span class="n">normalize</span><span class="o">=</span><span class="s2">&quot;index&quot;</span>
+<span class="p">)</span>
+<span class="n">cross_data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Transported</th>
+      <th>False</th>
+      <th>True</th>
+    </tr>
+    <tr>
+      <th>CryoSleep</th>
       <th></th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>A</th>
-      <td>117</td>
-      <td>139</td>
+      <th>False</th>
+      <td>0.671079</td>
+      <td>0.328921</td>
     </tr>
     <tr>
-      <th>B</th>
-      <td>353</td>
-      <td>426</td>
-    </tr>
-    <tr>
-      <th>C</th>
-      <td>341</td>
-      <td>406</td>
-    </tr>
-    <tr>
-      <th>D</th>
-      <td>248</td>
-      <td>230</td>
-    </tr>
-    <tr>
-      <th>E</th>
-      <td>429</td>
-      <td>447</td>
-    </tr>
-    <tr>
-      <th>F</th>
-      <td>1438</td>
-      <td>1356</td>
-    </tr>
-    <tr>
-      <th>G</th>
-      <td>1276</td>
-      <td>1283</td>
-    </tr>
-    <tr>
-      <th>T</th>
-      <td>4</td>
-      <td>1</td>
+      <th>True</th>
+      <td>0.182417</td>
+      <td>0.817583</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">side</span></code> を列インデックスとし，<code class="docutils literal notranslate"><span class="pre">deck</span></code> を行インデックスとして集計しました．</p>
-<p>途中，欠損値が邪魔になるので <code class="docutils literal notranslate"><span class="pre">dropna()</span></code> メソッドで削除しています．</p>
-<p>これをヒートマップにしましょう．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cabin_data</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Greens&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 棒グラフとして表示する</span>
+<span class="n">barplot</span> <span class="o">=</span> <span class="n">cross_data</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">rot</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/19465774f49e6c0cea3380308ace90cc3edb2306c0d4174086572eadcc12e192.png" src="_images/19465774f49e6c0cea3380308ace90cc3edb2306c0d4174086572eadcc12e192.png" />
+<img alt="_images/adef77432a36b50cd3e0e5a848155cbb0a5aa6d971d6d774837b79e86178b847.png" src="_images/adef77432a36b50cd3e0e5a848155cbb0a5aa6d971d6d774837b79e86178b847.png" />
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">side</span></code> に関してはまんべんなく，<code class="docutils literal notranslate"><span class="pre">deck</span></code> に関しては G と F に重点的に分布しているということがわかりました．</p>
+</section>
+</section>
+<section id="id8">
+<h2>不要な属性を取り除く<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Name 属性は予測の役に立たないと思われるので削除する</span>
+<span class="c1"># train_data = train_data.drop(&quot;Name&quot;, axis=1)</span>
+<span class="c1"># train_data.head()</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -919,15 +977,6 @@ Name: count, Length: 6560, dtype: Int64
         <p class="prev-next-title">はじめに</p>
       </div>
     </a>
-    <a class="right-next"
-       href="relation.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">各列のデータの関係を調べる</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div></div>
   
 </div>
@@ -948,20 +997,13 @@ Name: count, Length: 6560, dtype: Int64
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">データの入手</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">欠損値の調査</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">ヒストグラムを使う</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#age">Age</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roomservice">RoomService ほか</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">各列のデータを詳しく見る</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">ヒストグラムを描画する</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">サービスの消費額</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">グループ内で一貫性があるかどうか</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">円グラフを使う</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homeplanet">HomePlanet</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cryosleep">CryoSleep</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#destination">Destination</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vip">VIP</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transported">Transported</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">ヒートマップを使う</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">不要な属性を取り除く</a></li>
 </ul>
   </nav></div>
 
