@@ -10,19 +10,20 @@
         "files.trimTrailingWhitespace": true
       },
       "extensions": [
-        "mhutchie.git-graph",
-        "eamodio.gitlens",
-        "editorconfig.editorconfig",
-        "ms-python.python",
-        "ms-toolsai.jupyter",
-        "ms-toolsai.vscode-jupyter-cell-tags",
-        "ms-toolsai.jupyter-renderers",
-        "ms-toolsai.vscode-jupyter-slideshow",
-        "ms-python.vscode-pylance",
-        "ms-toolsai.jupyter",
-        "ms-python.black-formatter",
-        "github.vscode-github-actions"
-      ]
+		"mhutchie.git-graph",
+		"eamodio.gitlens",
+		"editorconfig.editorconfig",
+		"ms-python.python",
+		"ms-toolsai.jupyter",
+		"ms-toolsai.vscode-jupyter-cell-tags",
+		"ms-toolsai.jupyter-renderers",
+		"ms-toolsai.vscode-jupyter-slideshow",
+		"ms-python.vscode-pylance",
+		"ms-toolsai.jupyter",
+		"ms-python.black-formatter",
+		"github.vscode-github-actions",
+		"ms-python.mypy-type-checker"
+	]
     }
   }
 }
